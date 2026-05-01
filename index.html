@@ -1056,9 +1056,8 @@ async function submitContact(){
   </div>
 </div>
 <script>
-var PS={"Hollynes": {"mj": 19, "b": 12, "p": 15, "cs": null}, "Obaïda": {"mj": 19, "b": 0, "p": 1, "cs": null}, "Joao": {"mj": 18, "b": 25, "p": 10, "cs": null}, "Thomas": {"mj": 18, "b": 2, "p": 2, "cs": null}, "Caleb": {"mj": 15, "b": 6, "p": 1, "cs": null}, "Yassin": {"mj": 15, "b": 3, "p": 5, "cs": null}, "Éric": {"mj": 14, "b": 3, "p": 12, "cs": null}, "Ilyas K": {"mj": 14, "b": 1, "p": 1, "cs": null}, "Raphaël": {"mj": 14, "b": null, "p": null, "cs": 7}, "Adnane": {"mj": 12, "b": 0, "p": 3, "cs": null}, "Dagi": {"mj": 12, "b": 0, "p": 1, "cs": null}, "Hamza": {"mj": 12, "b": 2, "p": 8, "cs": null}, "Steven": {"mj": 11, "b": 4, "p": 4, "cs": null}, "Mehdi": {"mj": 10, "b": 16, "p": 3, "cs": null}, "Adonaï": {"mj": 9, "b": 2, "p": 0, "cs": null}, "Brunel": {"mj": 9, "b": 0, "p": 0, "cs": null}, "Ilyas G": {"mj": 8, "b": 0, "p": 0, "cs": null}, "Zakaria": {"mj": 8, "b": 0, "p": 0, "cs": null}, "Rayan": {"mj": 6, "b": 1, "p": 0, "cs": null}, "Olibel": {"mj": 5, "b": 2, "p": 1, "cs": null}, "Morgan": {"mj": 4, "b": 0, "p": 0, "cs": null}, "Mouhamed": {"mj": 4, "b": 0, "p": 1, "cs": null}, "Ali": {"mj": 3, "b": 1, "p": 3, "cs": null}, "Bilal": {"mj": 2, "b": 1, "p": 1, "cs": null}, "Driss": {"mj": 1, "b": 0, "p": 0, "cs": null}};
+var PS={"Hollynes": {"mj": 21, "b": 12, "p": 15, "cs": null}, "Obaïda": {"mj": 21, "b": 0, "p": 1, "cs": null}, "Joao": {"mj": 20, "b": 26, "p": 10, "cs": null}, "Thomas": {"mj": 20, "b": 2, "p": 2, "cs": null}, "Caleb": {"mj": 17, "b": 7, "p": 1, "cs": null}, "Yassin": {"mj": 17, "b": 3, "p": 6, "cs": null}, "Éric": {"mj": 16, "b": 3, "p": 12, "cs": null}, "Ilyas K": {"mj": 15, "b": 1, "p": 1, "cs": null}, "Raphaël": {"mj": 15, "b": null, "p": null, "cs": 7}, "Adnane": {"mj": 12, "b": 0, "p": 3, "cs": null}, "Dagi": {"mj": 14, "b": 0, "p": 1, "cs": null}, "Hamza": {"mj": 13, "b": 2, "p": 8, "cs": null}, "Steven": {"mj": 11, "b": 4, "p": 4, "cs": null}, "Mehdi": {"mj": 11, "b": 17, "p": 4, "cs": null}, "Adonaï": {"mj": 10, "b": 2, "p": 0, "cs": null}, "Brunel": {"mj": 9, "b": 0, "p": 0, "cs": null}, "Ilyas G": {"mj": 9, "b": 0, "p": 0, "cs": null}, "Zakaria": {"mj": 9, "b": 0, "p": 0, "cs": null}, "Rayan": {"mj": 8, "b": 1, "p": 0, "cs": null}, "Olibel": {"mj": 5, "b": 2, "p": 1, "cs": null}, "Morgan": {"mj": 5, "b": 0, "p": 0, "cs": null}, "Mouhamed": {"mj": 5, "b": 0, "p": 1, "cs": null}, "Ali": {"mj": 4, "b": 2, "p": 3, "cs": null}, "Bilal": {"mj": 2, "b": 1, "p": 1, "cs": null}, "Driss": {"mj": 2, "b": 0, "p": 0, "cs": null}};
 
-/* ── Player modal ── */
 function openPM(name,pos,num){
   var s=PS[name];
   document.getElementById('pm-pos').textContent=pos;
@@ -1085,19 +1084,13 @@ function closePM(){
 
 /* ── Article modal ── */
 function openArt(id, noHistory){
-  // hide all articles
-  document.querySelectorAll('.art-content').forEach(function(el){
-    el.style.display='none';
-  });
-  // show only the requested one
+  document.querySelectorAll('.art-content').forEach(function(el){ el.style.display='none'; });
   var el=document.getElementById(id);
   if(el) el.style.display='block';
-  // show overlay
   var ov=document.getElementById('art-ov');
   ov.classList.add('open');
   ov.scrollTop=0;
   document.body.style.overflow='hidden';
-  // update URL hash
   if(!noHistory) history.pushState({art:id},'','#news-'+id);
 }
 function closeArt(){
@@ -1106,7 +1099,6 @@ function closeArt(){
   if(location.hash.indexOf('#news-')===0) history.pushState({},'',location.pathname);
 }
 
-/* ── Copy link ── */
 function copyArtLink(id, btn){
   var url=location.protocol+'//'+location.host+location.pathname+'#news-'+id;
   navigator.clipboard.writeText(url).then(function(){
@@ -1116,7 +1108,6 @@ function copyArtLink(id, btn){
   });
 }
 
-/* ── Deep link on load ── */
 window.addEventListener('DOMContentLoaded',function(){
   var h=location.hash;
   if(h.indexOf('#news-')===0) openArt(h.replace('#news-',''),true);
@@ -1125,7 +1116,6 @@ window.addEventListener('popstate',function(e){
   if(e.state&&e.state.art) openArt(e.state.art,true);
   else closeArt();
 });
-
 document.addEventListener('keydown',function(e){
   if(e.key==='Escape'){closeArt();closePM();}
 });
